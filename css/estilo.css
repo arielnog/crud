@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box
+}
+
+body {
+    background: #0f2027;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
+.desc{
+    display: none;
+}
+
+#btn{
+    padding-top: 20px;
+}
+
+.radio-form{
+    padding: 15px;
+}
+
+.card-marg {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    box-shadow: 10px 10px 30px #000;
+}
+
+#atendimento{
+    margin: 20px 15px;
+    padding: 20px 0px;
+}
+
+#atendimento input{
+    margin: 0px 30px;
+    width: 95%;
+}
+ 
+#border-radio{
+    margin: 20px 5px;
+}
+
+.border{
+    margin: 20px;
+}
+
+label{
+    margin-top: 20px;
+}
+
+@media (max-width:1000px) {
+    .timeline {
+        width: 100%;
+    }
+}
