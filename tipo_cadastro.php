@@ -1,3 +1,17 @@
+<?php 
+include_once 'conecta_bd.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    $id_cliente = $_POST["id_cliente"];
+
+    $sql = "SELECT * 
+            FROM novo_cliente 
+            where id_cliente='$id_cliente'";
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,14 +49,14 @@
                     </div>
                     <div id="atendimentoone" class="form-group row desc">
                         <div id="btn" class="col-sm-12">
-                            <a href="form_novos.html" class="btn btn-primary">Continuar</a>
+                            <a href="form_novos.php" class="btn btn-primary">Continuar</a>
                             <button class="btn btn-danger">Voltar</button>
                         </div>
                     </div>
                     <form action="">
                         <div id="atendimentotwo" class="form-group row desc">
                             <div id="atendimento" class="border">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Informe o seu codigo de cadastro.">
+                                <input type="text" class="form-control" name="id_cliente" placeholder="Informe o seu codigo de cadastro.">
                                 <small class="form-text text-muted">Este código foi informado e também enviado para
                                     seu email, após seu registro.</small>
                             </div>
