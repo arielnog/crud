@@ -1,13 +1,42 @@
-<?php 
+<?php
 include_once 'conecta_bd.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $id_cliente = $_POST["id_cliente"];
 
     $sql = "SELECT * 
             FROM novo_cliente 
             where id_cliente='$id_cliente'";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(array(':id_cliente' => "$id_cliente"));
+    $retorno = $stmt->fetch();
+    if ($stmt->rowCount() > 0) {
+
+        session_start();
+
+        $_SESSION['logado'] = "ok";
+        $_SESSION['tipoPessoa'] = $retorno['tipoPessoa'];
+        $_SESSION['id_cliente'] = $retorno['id_cliente'];
+        $_SESSION['nome'] = $retorno['nome'];
+        $_SESSION['nome_2'] = $retorno['nome_2'];
+        $_SESSION['qtd_pares'] = $retorno['qtd_pares'];
+        $_SESSION['logradouro'] = $retorno['logradouro'];
+        $_SESSION['cep'] = $retorno['cep'];
+        $_SESSION['num'] = $retorno['num'];
+        $_SESSION['complemento'] = $retorno['complemento'];
+        $_SESSION['id_bairro'] = $retorno['id_bairro'];
+        $_SESSION['cidade'] = $retorno['cidade'];
+        $_SESSION['email'] = $retorno['email'];
+        $_SESSION['cel'] = $retorno['cel'];
+
+        if ($_SESSION['tipoPessoa'] == "1") {
+            header("location: form_juridico.php");
+        } else if ($_SESSION['tipoPessoa']  == "2") {
+            header("location: form_fisico.php");
+        }
+    }
 
 }
 
@@ -53,8 +82,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                             <button class="btn btn-danger">Voltar</button>
                         </div>
                     </div>
-                    <form action="">
-                        <div id="atendimentotwo" class="form-group row desc">
+
+                    <div id="atendimentotwo" class="form-group row desc">
+                        <form method="POST">
                             <div id="atendimento" class="border">
                                 <input type="text" class="form-control" name="id_cliente" placeholder="Informe o seu codigo de cadastro.">
                                 <small class="form-text text-muted">Este código foi informado e também enviado para
@@ -64,11 +94,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                                 <button type="submit" class="btn btn-primary">Continuar</button>
                                 <button class="btn btn-danger">Voltar</button>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
     </main>
 </body>
 <script src="./js/jquery.js"></script>

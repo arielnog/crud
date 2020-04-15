@@ -1,7 +1,7 @@
 <?php
 include_once 'conecta_bd.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $tipoPessoa = $_POST['tipoPessoa'];
     $id_cliente = $_POST['id_cliente'];
@@ -17,52 +17,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $email_cliente = $_POST['email'];
     $cel_cliente = $_POST['cel'];
 
-    
-    /*(if (!preg_match("/^[a-zA-Z ]*$/",$nome)) {
-        $Err_nome = "Only letters and white space allowed";
-      }else if(!preg_match("/^[a-zA-Z ]*$/",$nome_2)){
-        $nome_2Err = "Only letters and white space allowed";
-      }else if(!preg_match("/^[a-zA-Z ]*$/",$logradouro)){
-        $nome_2Err = "Only letters and white space allowed";
-      }else if(!preg_match("/^[0-9 ]*$/",$cep)){
-        $nome_2Err = "Only letters and white space allowed";
-      }else if(!preg_match("/^[0-9 ]*$/",$num)){
-        $nome_2Err = "Only letters and white space allowed";
-      }else if(!preg_match("/^[a-zA-Z0-9 ]*$/",$complemento)){
-        $nome_2Err = "Only letters and white space allowed";
-      }else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $emailErr = "Invalid email format";
-      }else if(!preg_match("/^[0-9 ]*$/",$cel)){
-        $nome_2Err = "Only letters and white space allowed";
-      }*/
-    
-
     $sql = "INSERT INTO 
             novo_cliente (tipoPessoa, id_cliente,nome,nome_2,qtd_pares,logradouro,cep,num,complemento,id_bairro,cidade,email,cel)
             VALUES (:tipoPessoa,  :id_cliente, :nome, :nome_2, :qtd_pares, :logradouro, :cep, :num, :complemento, :id_bairro, :cidade, :email, :cel)";
 
     $stmt = $conn->prepare($sql);
     if ($pdoExec = $stmt->execute(array(
-        ':tipoPessoa' =>"$tipoPessoa",
-        ':id_cliente' =>$id_cliente,
-        ':nome' =>$nome,
-        ':nome_2' =>$nome_2,
-        ':qtd_pares' =>$qtd_pares,
-        ':logradouro' =>$logradouro,
-        ':cep' =>$cep,
-        ':num' =>$num,
-        ':complemento' =>$complemento,
-        ':id_bairro' =>$id_bairro,
-        ':cidade' =>$cidade,
-        'email' =>$email_cliente,
-        ':cel' =>$cel_cliente
-        ))){
-            echo "<script>
+        ':tipoPessoa' => "$tipoPessoa",
+        ':id_cliente' => $id_cliente,
+        ':nome' => $nome,
+        ':nome_2' => $nome_2,
+        ':qtd_pares' => $qtd_pares,
+        ':logradouro' => $logradouro,
+        ':cep' => $cep,
+        ':num' => $num,
+        ':complemento' => $complemento,
+        ':id_bairro' => $id_bairro,
+        ':cidade' => $cidade,
+        'email' => $email_cliente,
+        ':cel' => $cel_cliente
+    ))) {
+        echo "<script>
             alert('Usuario Cadastrado com Sucesso!');
             location.href = 'tipo_cadastro.php';
             </script>";
-        };
-
+    };
 }
 
 ?>
@@ -79,6 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/estilo.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/jquery.mask.min.js"></script>
 </head>
 
 <body>
@@ -90,11 +73,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="form-row" required>
                         <div class="radio-form">
                             <label>Pessoa Fisica: </label>
-                            <input type="radio" name="tipoPessoa" id="tipoPessoa" value="Fisica">
+                            <input type="radio" name="tipoPessoa" id="tipoPessoa" value="1" required>
                         </div>
                         <div class="radio-form">
                             <label>Pessoa Juridica: </label>
-                            <input type="radio" name="tipoPessoa" id="tipoPessoa" value="Juridica">
+                            <input type="radio" name="tipoPessoa" id="tipoPessoa" value="2">
                         </div>
                     </div>
                 </div>
@@ -108,11 +91,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                             <input class="form-control" value="<?php echo uniqid() ?>" type="text" name="id_cliente" readonly>
                         </div>
                         <div class="col-sm-3">
-                            <label id="tipoPessoaFisica" for="">Nome: </label>
-                            <input class="form-control" required type="text" name="nome">
+                            <label id="tipoPessoaFisica" for="">Nome/Razão Social </label>
+                            <input class="form-control" required type="text" name="nome" id="nome">
                         </div>
                         <div class="col-sm-4">
-                            <label for="">Sobrenome: </label>
+                            <label for="">Sobrenome/Nome Fantasia: </label>
                             <input class="form-control" required type="text" name="nome_2" id="">
                         </div>
                         <div class="col-sm-3">
@@ -128,15 +111,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                         <div class="col-sm-2">
                             <label for="">CEP: </label>
-                            <input class="form-control" required type="text" name="cep">
+                            <input class="form-control" required type="text" name="cep" id="cep">
                         </div>
                         <div class="col-sm-1">
                             <label for="">Numero: </label>
-                            <input class="form-control" type="text" name="num">
+                            <input class="form-control" type="text" id="num" name="num">
                         </div>
                         <div class="col-sm-3">
                             <label for="">Complemento: </label>
-                            <input class="form-control"  type="text" name="complemento">
+                            <input class="form-control" type="text" name="complemento">
                         </div>
                         <div class="col-sm-3">
                             <label for="">Bairro: </label>
@@ -157,7 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                         <div class="col-sm-3">
                             <label for="">Celular: </label>
-                            <input class="form-control" required type="text" name="cel">
+                            <input class="form-control" required type="text" id="celular" name="cel">
                         </div>
                     </div>
                 </div>
@@ -171,11 +154,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 </div>
             </div>
         </form>
-
     </main>
-    <script src="./js/jquery.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#num").mask("0000")
+            $("#cep").mask("00000-000")
+            $("#celular").mask("(00) 00000-0000")
+        });
+    </script>
 </body>
 
 </html>
