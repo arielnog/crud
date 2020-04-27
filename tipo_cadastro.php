@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         session_start();
 
-        $_SESSION['logado'] = "ok";
+        $_SESSION['check'] = "ok";
         $_SESSION['tipoPessoa'] = $retorno['tipoPessoa'];
         $_SESSION['id_cliente'] = $retorno['id_cliente'];
         $_SESSION['nome'] = $retorno['nome'];
@@ -35,7 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("location: form_juridico.php");
         } else if ($_SESSION['tipoPessoa']  == "2") {
             header("location: form_fisico.php");
-        }
+        }   
+    }else {
+        echo "<script>
+        alert('Código não encontrado na base de dados!');
+        location.href = 'tipo_cadastro.php';
+        </script>";
     }
 
 }

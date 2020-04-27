@@ -1,16 +1,11 @@
 <?php
 error_reporting(1);
 include_once "conecta_bd.php";
-session_cache_expire(1);
 session_start();
 
-if ($_SESSION["logado"] != "ok") {
+if ($_SESSION["check"] != "ok") {
     header("location: tipo_cadastro.php");
-}
-
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+}else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $tipoPessoa = $_SESSION['tipoPessoa'];
     $id_cliente = $_POST['id_cliente'];

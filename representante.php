@@ -1,3 +1,13 @@
+<?php
+include_once "conecta_bd.php";
+
+session_start();
+
+if ($_SESSION["logado"] != "ok") {
+    header("location: login.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +24,7 @@
 
 <body>
     <main>
+        <h2>Olá <?php echo $_SESSION['representante']?></h2>
         <div class="container">
             <div class="card card-marg">
                 <div class="card-body text-center">
@@ -23,7 +34,7 @@
                                 <tr>
                                     <th>Codigo</th>
                                     <th>Nome do Cliente</th>
-                                    <th>Bairro</th>
+                                    <th>Tipo de Pessoa</th>
                                     <th>Opções</th>
                                 </tr>
                             </thead>
@@ -33,9 +44,8 @@
                                     <td></td>
                                     <td></td>
                                     <td>
-                                        <button class="btn btn-success">V</button>
-                                        <button class="btn btn-warning">V</button>
-                                        <button class="btn btn-danger">V</button>
+                                        <button class="btn btn-success"><i class="fas fa-eye"></i></button>
+                                        <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>
                             </tbody>

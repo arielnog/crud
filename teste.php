@@ -18,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt->rowCount() > 0) {
 
         session_start();
-        $_SESSION['logado'] = "ok";
         $_SESSION['id_representante'] = $retorno['id_representante'];
         $_SESSION['representante'] = $retorno['representante'];
         $_SESSION['email_repre'] = $retorno['email_repre'];
@@ -54,17 +53,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="card text-center card-marg">
                 <div class="card-body">
                     <h2 class="card-title">CRUD</h2>
-                    <form method="POST" action="">
+                    <form action="">
                         <div class="form-group row">
                             <label for="email" class="col-sm-2 col-form-label">E-mail</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="login" placeholder="Digite seu E-mail">
+                                <input type="email" class="form-control" id="email" placeholder="Digite seu E-mail">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="senha" class="col-sm-2 col-form-label">Senha</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" name="senha" placeholder="Digite sua Senha">
+                                <input type="password" class="form-control" id="senha" placeholder="Digite sua Senha">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Entrar</button>

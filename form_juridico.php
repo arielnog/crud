@@ -3,10 +3,9 @@ error_reporting(1);
 include_once "conecta_bd.php";
 session_start();
 
-if ($_SESSION["logado"] != "ok") {
+if ($_SESSION["check"] != "ok") {
     header("location: tipo_cadastro.php");
-}
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+}else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $tipoPessoa = $_SESSION['tipoPessoa'];
     $id_cliente = $_POST['id_cliente'];
@@ -143,7 +142,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                         </div>
                     </div>
-                    <div class="container card card-marg ">
+                    <!--<div class="container card card-marg ">
                         <div class="card-body border">
                             <h4>Dados dos Sócios</h4>
                             <div class="form-row">
@@ -203,7 +202,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <input type="file">
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="container card card-marg ">
                     <div class="card-body text-center border">
                         <button class="btn btn-primary col-sm-3">Enviar</button>

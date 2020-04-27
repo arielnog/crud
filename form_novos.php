@@ -17,9 +17,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_cliente = $_POST['email'];
     $cel_cliente = $_POST['cel'];
 
+
     $sql = "INSERT INTO 
             novo_cliente (tipoPessoa, id_cliente,nome,nome_2,qtd_pares,logradouro,cep,num,complemento,id_bairro,cidade,email,cel)
-            VALUES (:tipoPessoa,  :id_cliente, :nome, :nome_2, :qtd_pares, :logradouro, :cep, :num, :complemento, :id_bairro, :cidade, :email, :cel)";
+            VALUES (:tipoPessoa,  :id_cliente, :nome, :nome_2, :qtd_pares, :logradouro, :cep, :num, :complemento, :id_bairro, :cidade, :email, :cel) ";
 
     $stmt = $conn->prepare($sql);
     if ($pdoExec = $stmt->execute(array(
@@ -36,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ':cidade' => $cidade,
         'email' => $email_cliente,
         ':cel' => $cel_cliente
+        
     ))) {
         echo "<script>
             alert('Usuario Cadastrado com Sucesso!');
@@ -123,9 +125,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-sm-3">
                             <label for="">Bairro: </label>
-                            <select name="id_bairro" required class="form-control">
-                                <option value="1">Brotas</option>
-                            </select>
+
+                            
+                            <?php
+                            $sql_2 = "SELECT * FROM bairro";
+                            $stt = $conn->prepare($sql_2);
+                            $stt->execute();
+                            $results = $stt->fetchAll(PDO::FETCH_ASSOC);
+                            if ($stt->rowCount() > 0) { ?>
+                                <select name="id_bairro" required class="form-control">
+                                    <option value="0">--------------</option>
+                                    <?php foreach ($results as $row) { ?>
+                                        <option value="<?php echo $row['id_bairro']; ?>"><?php echo $row['bairro'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            <?php } ?>
                         </div>
                         <div class="col-sm-3">
                             <label for="">Cidade: </label>
@@ -136,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-sm-3">
                             <label for="">E-mail: </label>
-                            <input class="form-control" required type="email" name="email">
+                            <input class="form-control" value="<?php echo $row['id_representante']?>" required type="email" name="email">
                         </div>
                         <div class="col-sm-3">
                             <label for="">Celular: </label>
