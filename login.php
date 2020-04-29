@@ -19,9 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         session_start();
         $_SESSION['logado'] = "ok";
-        $_SESSION['id_representante'] = $retorno['id_representante'];
-        $_SESSION['representante'] = $retorno['representante'];
-        $_SESSION['email_repre'] = $retorno['email_repre'];
+        $_SESSION['id_repre'] = $retorno['id_representante'];
+        $_SESSION['nome_repre'] = $retorno['nome_repre'];
+
         
         header("Location: representante.php");
     }else{
@@ -68,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Entrar</button>
+                        <a href="tipo_cadastro.php" type="submit" class="btn btn-warning">Cadastro de clientes</a>
                     </form>
                 </div>
             </div>

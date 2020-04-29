@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ':complemento' => $complemento,
         ':id_bairro' => $id_bairro,
         ':cidade' => $cidade,
-        'email' => $email_cliente,
+        ':email' => $email_cliente,
         ':cel' => $cel_cliente
         
     ))) {
@@ -75,11 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="form-row" required>
                         <div class="radio-form">
                             <label>Pessoa Fisica: </label>
-                            <input type="radio" name="tipoPessoa" id="tipoPessoa" value="1" required>
+                            <input type="radio" name="tipoPessoa" id="tipoPessoa" value="Fisica" required>
                         </div>
                         <div class="radio-form">
                             <label>Pessoa Juridica: </label>
-                            <input type="radio" name="tipoPessoa" id="tipoPessoa" value="2">
+                            <input type="radio" name="tipoPessoa" id="tipoPessoa" value="Juridica">
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-sm-4">
                             <label for="">Sobrenome/Nome Fantasia: </label>
-                            <input class="form-control" required type="text" name="nome_2" id="">
+                            <input class="form-control" required type="text" name="nome_2" >
                         </div>
                         <div class="col-sm-3">
                             <label for="">Quantidade de Pares: </label>
@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <select name="id_bairro" required class="form-control">
                                     <option value="0">--------------</option>
                                     <?php foreach ($results as $row) { ?>
-                                        <option value="<?php echo $row['id_bairro']; ?>"><?php echo $row['bairro'] ?></option>
+                                        <option value="<?php echo $row['id_bairro']; ?>"><?php echo $row['nome_bairro'] ?></option>
                                     <?php } ?>
                                 </select>
                             <?php } ?>
@@ -150,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-sm-3">
                             <label for="">E-mail: </label>
-                            <input class="form-control" value="<?php echo $row['id_representante']?>" required type="email" name="email">
+                            <input class="form-control" required type="email" name="email">
                         </div>
                         <div class="col-sm-3">
                             <label for="">Celular: </label>

@@ -19,5 +19,5 @@ session_unset();
 // Por último, destrói a sessão
 session_destroy();
 
-header("Location: tipo_cadastro.php"); 
+header("Location: login.php"); 
 ?>
