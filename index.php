@@ -30,13 +30,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['cidade'] = $retorno['cidade'];
         $_SESSION['email'] = $retorno['email'];
         $_SESSION['cel'] = $retorno['cel'];
+        $_SESSION['status'] = $retorno['status'];
 
         header("location:form_atentidos.php");
 
     }else {
         echo "<script>
         alert('Código não encontrado na base de dados!');
-        location.href = 'tipo_cadastro.php';
+        location.href = 'index.php';
         </script>";
     }
 
@@ -44,14 +45,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ariel Rocha Nogueira - Engenheiro da Computação</title>
+    <title>Pagina Inicial</title>
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/estilo.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
