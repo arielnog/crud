@@ -37,13 +37,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ':cidade' => $cidade,
         ':email' => $email_cliente,
         ':cel' => $cel_cliente
-        
+
     ))) {
         echo "<script>
-            alert('Usuario Cadastrado com Sucesso!');
-            location.href = 'tipo_cadastro.php';
+            alert('Cliente cadastrado com sucesso!');
+            location.href = 'index.php';
             </script>";
-    };
+    } else {
+        echo "<script>
+    alert('Erro ao cadastrar o cliente!');
+    </script>";
+    }
 }
 
 ?>
@@ -56,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="keywords" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ariel Rocha Nogueira - Engenheiro da Computação</title>
+    <title>Cadastro de novo Cliente</title>
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/estilo.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -88,19 +92,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="card-body border">
                     <h4 class="card-title">Novos Usuários</h4>
                     <div class="form-row">
-                        <div class="col-sm-2">
-                            <label for="">Codigo: </label>
-                            <input class="form-control" value="<?php echo uniqid() ?>" type="text" name="id_cliente" readonly>
-                        </div>
-                        <div class="col-sm-3">
+                        <input class="form-control" value="<?php echo uniqid() ?>" type="hidden" name="id_cliente" readonly>
+                        <div class="col-sm-4">
                             <label id="tipoPessoaFisica" for="">Nome/Razão Social </label>
                             <input class="form-control" required type="text" name="nome" id="nome">
                         </div>
                         <div class="col-sm-4">
                             <label for="">Sobrenome/Nome Fantasia: </label>
-                            <input class="form-control" required type="text" name="nome_2" >
+                            <input class="form-control" required type="text" name="nome_2">
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="">Quantidade de Pares: </label>
                             <select class="form-control" required name="qtd_pares">
                                 <option value="Acima de 35 Pares">Acima de 35 Pares</option>
@@ -125,27 +126,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-sm-3">
                             <label for="">Bairro: </label>
-
-                            
-                            <?php
-                            $sql_2 = "SELECT * FROM bairro";
-                            $stt = $conn->prepare($sql_2);
-                            $stt->execute();
-                            $results = $stt->fetchAll(PDO::FETCH_ASSOC);
-                            if ($stt->rowCount() > 0) { ?>
-                                <select name="id_bairro" required class="form-control">
-                                    <option value="0">--------------</option>
-                                    <?php foreach ($results as $row) { ?>
-                                        <option value="<?php echo $row['id_bairro']; ?>"><?php echo $row['nome_bairro'] ?></option>
-                                    <?php } ?>
-                                </select>
-                            <?php } ?>
+                            <div>
+                                <?php
+                                $sql_2 = "SELECT * FROM bairro";
+                                $stt = $conn->prepare($sql_2);
+                                $stt->execute();
+                                $results = $stt->fetchAll(PDO::FETCH_ASSOC);
+                                if ($stt->rowCount() > 0) { ?>
+                                    <select name="id_bairro" required class="form-control">
+                                        <option value="0">--------------</option>
+                                        <?php foreach ($results as $row) { ?>
+                                            <option value="<?php echo $row['id_bairro']; ?>"> <?php echo $row['nome_bairro'] ?> </option>
+                                        <?php } ?>
+                                    </select>
+                                <?php } ?>
+                            </div>
                         </div>
                         <div class="col-sm-3">
                             <label for="">Cidade: </label>
                             <select name="cidade" required class="form-control">
                                 <option value="Salvador">Salvador</option>
-                                <option value="Simoões Filho">Simoões Filho</option>
                             </select>
                         </div>
                         <div class="col-sm-3">
@@ -163,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="container card card-marg ">
                 <div class="card-body text-center border">
                     <button type="submit" class="btn btn-primary col-sm-3">Enviar</button>
-                    <a href="tipo_cadastro.php" class="btn btn-danger col-sm-3">Voltar</a>
+                    <a href="index.php" class="btn btn-danger col-sm-3">Voltar</a>
                     <button type="reset" class="btn btn-warning col-sm-3">Limpar</button>
                 </div>
             </div>
@@ -173,7 +173,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $(document).ready(function() {
             $("#num").mask("0000")
             $("#cep").mask("00000-000")
-            $("#celular").mask("(00) 00000-0000")
+            $("#celular").mask("(00)00000-0000")
         });
     </script>
 </body>

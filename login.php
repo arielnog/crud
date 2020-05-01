@@ -22,9 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['id_repre'] = $retorno['id_representante'];
         $_SESSION['nome_repre'] = $retorno['nome_repre'];
 
-        
+
         header("Location: representante.php");
-    }else{
+    } else {
         echo "<script>
             alert('Usuario Cadastrado com Sucesso!');
             </script>";
@@ -33,13 +33,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="keywords" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ariel Rocha Nogueira - Engenheiro da Computação</title>
+    <title>Login de representante</title>
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/estilo.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -48,31 +49,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="./js/script.js"></script>
     <script src="./js/jquery.mask.min.js"></script>
 </head>
+
 <body>
-<main>
+    <main>
         <div class="container">
             <div class="card text-center card-marg">
+                <h2 class="">CRUD</h2>
                 <div class="card-body">
-                    <h2 class="card-title">CRUD</h2>
                     <form method="POST" action="">
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-2 col-form-label">E-mail</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="login" placeholder="Digite seu E-mail">
+                        <div class="form-group">
+                            <div>
+                                <input type="text" class="form-control" name="login" placeholder="Digite seu Login">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="senha" class="col-sm-2 col-form-label">Senha</label>
-                            <div class="col-sm-10">
+                        <div class="form-group ">
+                            <div>
                                 <input type="password" class="form-control" name="senha" placeholder="Digite sua Senha">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Entrar</button>
-                        <a href="tipo_cadastro.php" type="submit" class="btn btn-warning">Cadastro de clientes</a>
+                        <a href="index.php" type="submit" class="btn btn-warning">Cadastro de clientes</a>
                     </form>
                 </div>
             </div>
         </div>
     </main>
 </body>
+
 </html>
